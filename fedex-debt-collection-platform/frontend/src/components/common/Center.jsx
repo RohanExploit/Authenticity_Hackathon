@@ -1,14 +1,18 @@
-export default function Center({ children }) {
+import React from 'react';
+
+const Center = ({ children, style = {} }) => {
   return (
-    <div style={wrapper}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+      width: '100%',
+      ...style
+    }}>
       {children}
     </div>
   );
-}
-
-const wrapper = {
-  minHeight: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center"
 };
+
+export default Center;

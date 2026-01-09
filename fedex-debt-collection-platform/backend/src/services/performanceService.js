@@ -1,26 +1,24 @@
-import { collectorPerformance } from "../models/CollectorPerformance.js";
+export let performance = {};
 
 export const updatePerformance = (collector, status, amount = 0) => {
-    if (!collectorPerformance[collector]) {
-        collectorPerformance[collector] = {
-            totalCases: 0,
-            successfulCases: 0,
-            failedCases: 0,
-            totalRecoveredAmount: 0
+    if (!performance[collector]) {
+        performance[collector] = {
+            total: 0,
+            success: 0,
+            failed: 0,
+            recovered: 0
         };
     }
 
-    const p = collectorPerformance[collector];
-    p.totalCases++;
+    const p = performance[collector];
+    p.total++;
 
     if (status === "PAID") {
-        p.successfulCases++;
-        p.totalRecoveredAmount += amount;
+        p.success++;
+        p.recovered += Number(amount);
     }
 
     if (status === "FAILED") {
-        p.failedCases++;
+        p.failed++;
     }
-
-    p.successRate = ((p.successfulCases / p.totalCases) * 100).toFixed(2);
 };

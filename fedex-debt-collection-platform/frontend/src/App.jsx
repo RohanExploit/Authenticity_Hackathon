@@ -1,16 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import AutoAssignment from "./pages/AutoAssignment";
+import { BrowserRouter } from "react-router-dom";
+import Navbar from "./components/common/Navbar";
+import AppRoutes from "./routes";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/auto-assign" element={<AutoAssignment />} />
-      </Routes>
+      <Navbar />
+      <AppRoutes />
     </BrowserRouter>
   );
 }

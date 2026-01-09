@@ -1,5 +1,5 @@
-import { collectorPerformance } from "../models/CollectorPerformance.js";
+import { performance } from "../services/performanceService.js";
 
-export const getPerformance = (_, res) => {
-    res.json(collectorPerformance);
+export const getPerformance = (req, res) => {
+    res.json(performance);
 };
