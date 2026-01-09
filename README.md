@@ -128,30 +128,9 @@ fedex-debt-collection-platform/
 
 ---
 
-##  How to Run the Project
-
-### Backend
-
-```bash
-cd backend
-npm install
-node src/server.js
-Backend runs on:
-
-http://localhost:5000
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-
-http://localhost:5173
-
----
 
 ## Application Routes
+
 Page	URL
 Customers	/customers
 Auto Assignment	/auto-assign
@@ -159,7 +138,7 @@ Collector Dashboard	/collector
 Performance Dashboard	/performance
 Manager Dashboard	/manager
 
- End-to-End Workflow
+ ## End-to-End Workflow
 
 Backend seeds customers
 
@@ -171,7 +150,7 @@ Collector views assigned cases
 
 Collector updates status
 
-System updates:
+## System updates:
 
 Performance metrics
 
@@ -186,3 +165,25 @@ Unrecovered cases exportable as CSV
 Communication logs stored as flat files
 
 Performance data visualized with charts
+
+##  How to Run the Project
+
+```bash
+### Backend
+
+cd backend
+npm install
+node src/server.js
+Backend runs on:
+
+http://localhost:5000
+
+### Frontend
+
+cd frontend
+npm install
+npm run dev
+
+http://localhost:5173
+
+---
