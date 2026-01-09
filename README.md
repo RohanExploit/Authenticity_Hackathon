@@ -116,7 +116,7 @@ No dark backgrounds or night-sky blue UI.
 ---
 
 ##  Project Structure (High Level)
-
+```
 fedex-debt-collection-platform/
 ├── frontend/ # React UI
 ├── backend/ # Express APIs
@@ -125,7 +125,7 @@ fedex-debt-collection-platform/
 ├── scripts/ # Automation & exports
 ├── docs/ # Documentation
 └── README.md
-
+```
 ---
 
 
