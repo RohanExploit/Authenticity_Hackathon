@@ -130,7 +130,7 @@ fedex-debt-collection-platform/
 
 ##  How to Run the Project
 
-### 1️ Backend
+### Backend
 
 ```bash
 cd backend
@@ -140,6 +140,9 @@ Backend runs on:
 
 http://localhost:5000
 
+### Frontend
+
+```bash
 cd frontend
 npm install
 npm run dev
