@@ -7,6 +7,7 @@ export default function Navbar() {
                 <a href="/auto-assign" style={link}>Auto Assign</a>
                 <a href="/collector" style={link}>Collector</a>
                 <a href="/performance" style={link}>Performance</a>
+                <a href="/settings" style={link}>Settings</a>
             </div>
         </div>
     );
