@@ -146,7 +146,9 @@ npm run dev
 
 http://localhost:5173
 
-Application Routes
+---
+
+## Application Routes
 Page	URL
 Customers	/customers
 Auto Assignment	/auto-assign
