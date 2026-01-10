@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import caseRoutes from "./routes/index.js";
+import caseRoutes from "./routes/caseRoutes.js";
 import performanceRoutes from "./routes/performanceRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
