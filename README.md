@@ -1,3 +1,12 @@
+##  Depoloyment
+
+### Frontend (Firebase Hosting):
+https://debtcollection-23530454-35520.web.app/
+
+### Backend (Render – Node.js / Express):
+https://authenticity-hackathon.onrender.com/
+
+
 #  FedEx Debt Collection Management Platform (MVP)
 
 A full-stack, AI-assisted web platform to manage overdue customer accounts, automate case assignment, track collector performance, and replace manual Excel/email-based workflows.
@@ -166,11 +175,4 @@ Communication logs stored as flat files
 
 Performance data visualized with charts
 
-##  Depoloyment
-
-### Frontend (Firebase Hosting):
-https://debtcollection-23530454-35520.web.app/
-
-### Backend (Render – Node.js / Express):
-https://authenticity-hackathon.onrender.com/
 
