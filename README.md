@@ -166,24 +166,11 @@ Communication logs stored as flat files
 
 Performance data visualized with charts
 
-##  How to Run the Project
+##  Depoloyment
 
-```bash
-### Backend
+### Frontend (Firebase Hosting):
+https://debtcollection-23530454-35520.web.app/
 
-cd backend
-npm install
-node src/server.js
-Backend runs on:
+### Backend (Render – Node.js / Express):
+https://authenticity-hackathon.onrender.com/
 
-http://localhost:5000
-
-### Frontend
-
-cd frontend
-npm install
-npm run dev
-
-http://localhost:5173
-
----
