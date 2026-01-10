@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { api } from "../services/api";
 
 export default function AutoAssignment() {
-    const params = new URLSearchParams(window.location.search);
-    const customerId = params.get("id");
-    const risk = Number(params.get("risk"));
+    const [searchParams] = useSearchParams();
+    const customerId = searchParams.get("id");
+    const risk = Number(searchParams.get("risk"));
 
     const [riskScore] = useState(risk);
     const [collector, setCollector] = useState("collector1");
+    const navigate = useNavigate();
 
     const assign = async () => {
         await api.post("/assign-case", {
@@ -15,7 +17,7 @@ export default function AutoAssignment() {
             collector
         });
         alert("Case assigned successfully");
-        window.location = "/manager-dashboard"; // Clean UX: back to dashboard
+        navigate("/manager-dashboard"); // Clean UX: back to dashboard
     };
 
     return (

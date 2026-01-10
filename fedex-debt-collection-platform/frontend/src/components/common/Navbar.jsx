@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
     return (
         <div style={nav}>
             <h3>FedEx Debt Platform</h3>
             <div>
-                <a href="/customers" style={link}>Customers</a>
-                <a href="/auto-assign" style={link}>Auto Assign</a>
-                <a href="/collector" style={link}>Collector</a>
-                <a href="/performance" style={link}>Performance</a>
-                <a href="/settings" style={link}>Settings</a>
+                <Link to="/customers" style={link}>Customers</Link>
+                <Link to="/auto-assign" style={link}>Auto Assign</Link>
+                <Link to="/collector" style={link}>Collector</Link>
+                <Link to="/performance" style={link}>Performance</Link>
+                <Link to="/settings" style={link}>Settings</Link>
             </div>
         </div>
     );

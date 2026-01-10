@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 
 export default function Customers() {
     const [customers, setCustomers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get("/customers").then(res => setCustomers(res.data));
@@ -25,8 +27,7 @@ export default function Customers() {
                     <button
                         style={btn}
                         onClick={() =>
-                            window.location =
-                            `/auto-assign?id=${c.id}&risk=${c.riskScore}`
+                            navigate(`/auto-assign?id=${c.id}&risk=${c.riskScore}`)
                         }
                     >
                         Assign Case
