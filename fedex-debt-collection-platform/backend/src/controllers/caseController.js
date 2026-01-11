@@ -13,11 +13,8 @@ export const createCustomer = (req, res) => {
 };
 
 export const getCustomers = (req, res) => {
-    const enriched = customers.map(c => ({
-        ...c,
-        riskScore: calculateRiskScore(c)
-    }));
-    res.json(enriched);
+    // Optimization: riskScore is now pre-calculated in the model and maintained by mutations
+    res.json(customers);
 };
 
 // Case Logic
