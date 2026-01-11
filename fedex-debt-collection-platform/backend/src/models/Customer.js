@@ -1,4 +1,6 @@
-export let customers = [
+import { calculateRiskScore } from "../services/riskScoreService.js";
+
+const seedData = [
     {
         id: "CUST_001",
         overdueAmount: 5000,
@@ -18,3 +20,9 @@ export let customers = [
         paymentHistory: 85
     }
 ];
+
+// Initialize with risk scores
+export let customers = seedData.map(c => ({
+    ...c,
+    riskScore: calculateRiskScore(c)
+}));
