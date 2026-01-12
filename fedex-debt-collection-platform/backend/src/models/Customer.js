@@ -1,4 +1,6 @@
-export let customers = [
+import { calculateRiskScore } from "../services/riskScoreService.js";
+
+const initialCustomers = [
     {
         id: "CUST_001",
         overdueAmount: 5000,
@@ -18,3 +20,8 @@ export let customers = [
         paymentHistory: 85
     }
 ];
+
+export let customers = initialCustomers.map(c => ({
+    ...c,
+    riskScore: calculateRiskScore(c)
+}));
