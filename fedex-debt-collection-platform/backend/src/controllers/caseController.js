@@ -13,11 +13,9 @@ export const createCustomer = (req, res) => {
 };
 
 export const getCustomers = (req, res) => {
-    const enriched = customers.map(c => ({
-        ...c,
-        riskScore: calculateRiskScore(c)
-    }));
-    res.json(enriched);
+    // Optimization: riskScore is now pre-calculated in the model
+    // This avoids O(N) calculation and object allocation on every request
+    res.json(customers);
 };
 
 // Case Logic
