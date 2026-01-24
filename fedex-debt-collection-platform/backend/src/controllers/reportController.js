@@ -1,5 +1,5 @@
-import { cases } from "../models/Case.js";
+import { getAllCases } from "../models/Case.js";
 
 export const getUnrecovered = (req, res) => {
-    res.json(cases.filter(c => c.status === "FAILED"));
+    res.json(getAllCases().filter(c => c.status === "FAILED"));
 };
