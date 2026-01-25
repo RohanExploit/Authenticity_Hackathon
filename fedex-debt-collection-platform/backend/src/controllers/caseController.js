@@ -1,5 +1,5 @@
 import { customers } from "../models/Customer.js";
-import { cases } from "../models/Case.js";
+import { getAllCases, addCase, getCaseById, getCasesByCollector, getCaseCount } from "../models/Case.js";
 import { calculateRiskScore } from "../services/riskScoreService.js";
 import { updatePerformance } from "../services/performanceService.js";
 import { logCommunication } from "../services/communicationLogger.js";
@@ -21,21 +21,22 @@ export const getCustomers = (req, res) => {
 // Case Logic
 export const createCase = (req, res) => {
     const newCase = {
-        id: "CASE_" + (cases.length + 1) + "_" + Date.now().toString().slice(-4),
+        id: "CASE_" + (getCaseCount() + 1) + "_" + Date.now().toString().slice(-4),
         customerId: req.body.customerId,
         collector: req.body.collector,
         status: "ASSIGNED",
         createdAt: new Date()
     };
 
-    cases.push(newCase);
+    addCase(newCase);
     res.json(newCase);
 };
 
 export const updateCaseStatus = (req, res) => {
     const { caseId, status, amount, collector } = req.body;
 
-    const c = cases.find(x => x.id === caseId);
+    // Optimized: O(1) lookup
+    const c = getCaseById(caseId);
     if (!c) return res.status(404).send("Case not found");
 
     c.status = status;
@@ -48,16 +49,11 @@ export const updateCaseStatus = (req, res) => {
 
 export const getCasesForCollector = (req, res) => {
     const { collector } = req.params;
-    // Simple filter for prototype
-    res.json(cases.filter(c => c.collector === collector));
+    // Optimized: O(1) lookup via secondary index
+    res.json(getCasesByCollector(collector));
 };
 
-// For backward compatibility if strictly needed by existing routes, 
-// but we essentially replaced 'getAssignedCases' with 'getCasesForCollector' logic.
-// However, the router still points to 'getAssignedCases' in previous steps unless we update routes.js.
-// IMPORTANT: We will update routes.js next step to use 'getCasesForCollector'.
-// Keeping this as alias if any old code hits it? No, assume we fix routes.
 export const getAssignedCases = (req, res) => {
     const { collectorId } = req.params;
-    res.json(cases.filter(c => c.collector === collectorId));
+    res.json(getCasesByCollector(collectorId));
 };

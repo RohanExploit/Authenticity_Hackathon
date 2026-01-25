@@ -1,5 +1,5 @@
 import { customers } from "../models/Customer.js";
-import { cases } from "../models/Case.js";
+import { addCase } from "../models/Case.js";
 
 export const assignCase = (req, res) => {
     const { customerId, collector } = req.body;
@@ -17,7 +17,7 @@ export const assignCase = (req, res) => {
         amount: customer.overdueAmount,
         createdAt: new Date()
     };
-    cases.push(newCase);
+    addCase(newCase);
 
     res.send({ message: `Case for ${customerId} assigned to ${collector}`, case: newCase });
 };
