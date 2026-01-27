@@ -1,10 +1,10 @@
-import { customers } from "../models/Customer.js";
+import { getCustomerById } from "../models/Customer.js";
 import { addCase } from "../models/Case.js";
 
 export const assignCase = (req, res) => {
     const { customerId, collector } = req.body;
 
-    const customer = customers.find(c => c.id === customerId);
+    const customer = getCustomerById(customerId);
     if (!customer) {
         return res.status(404).send("Customer not found");
     }
