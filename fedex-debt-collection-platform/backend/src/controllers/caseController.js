@@ -1,4 +1,4 @@
-import { customers } from "../models/Customer.js";
+import { addCustomer, getAllCustomers } from "../models/Customer.js";
 import { addCase, getCaseById, getCaseCount, getCasesByCollector } from "../models/Case.js";
 import { calculateRiskScore } from "../services/riskScoreService.js";
 import { updatePerformance } from "../services/performanceService.js";
@@ -8,14 +8,14 @@ import { logCommunication } from "../services/communicationLogger.js";
 export const createCustomer = (req, res) => {
     const customer = { id: Date.now(), ...req.body };
     customer.riskScore = calculateRiskScore(customer);
-    customers.push(customer);
+    addCustomer(customer);
     res.json(customer);
 };
 
 export const getCustomers = (req, res) => {
     // Optimization: riskScore is now pre-calculated in the model
     // This avoids O(N) calculation and object allocation on every request
-    res.json(customers);
+    res.json(getAllCustomers());
 };
 
 // Case Logic
