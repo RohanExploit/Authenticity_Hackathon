@@ -21,7 +21,26 @@ const initialCustomers = [
     }
 ];
 
-export let customers = initialCustomers.map(c => ({
-    ...c,
-    riskScore: calculateRiskScore(c)
-}));
+// Optimized Customer model using Map for O(1) ID lookups
+const customers = new Map();
+
+// Initialize
+initialCustomers.forEach(c => {
+    const customer = {
+        ...c,
+        riskScore: calculateRiskScore(c)
+    };
+    customers.set(customer.id, customer);
+});
+
+export const addCustomer = (customer) => {
+    customers.set(customer.id, customer);
+};
+
+export const getCustomerById = (id) => {
+    return customers.get(id);
+};
+
+export const getAllCustomers = () => {
+    return Array.from(customers.values());
+};
