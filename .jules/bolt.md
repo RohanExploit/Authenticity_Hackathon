@@ -9,3 +9,7 @@
 ## 2026-01-27 - Secondary Index Optimization
 **Learning:** Iterating over a Map values to filter by a property is O(N). Maintaining a secondary index (Map<Prop, List>) reduces lookup time to O(1). However, secondary indexes must be diligently maintained on updates (remove from old, add to new) to avoid consistency issues.
 **Action:** Implemented `casesByCollector` index in `Case` model with proper upsert handling, reducing lookup time from ~1.7ms to ~0.0002ms (8500x improvement).
+
+## 2026-01-28 - Customer Lookup Optimization
+**Learning:** `Customer` model used an Array with `find()` (O(N)) for lookups.
+**Action:** Refactored to use `Map` (O(1)). Benchmark showed ~230x improvement (~0.2ms -> ~0.0009ms per lookup).
