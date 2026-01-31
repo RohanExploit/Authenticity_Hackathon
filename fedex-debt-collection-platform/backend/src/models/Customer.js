@@ -21,7 +21,19 @@ const initialCustomers = [
     }
 ];
 
-export let customers = initialCustomers.map(c => ({
-    ...c,
-    riskScore: calculateRiskScore(c)
-}));
+const customersMap = new Map();
+
+initialCustomers.forEach(c => {
+    const customer = {
+        ...c,
+        riskScore: calculateRiskScore(c)
+    };
+    customersMap.set(customer.id, customer);
+});
+
+export const getAllCustomers = () => Array.from(customersMap.values());
+export const getCustomerById = (id) => customersMap.get(id);
+export const addCustomer = (customer) => {
+    customersMap.set(customer.id, customer);
+    return customer;
+};
