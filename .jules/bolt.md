@@ -9,3 +9,7 @@
 ## 2026-01-27 - Secondary Index Optimization
 **Learning:** Iterating over a Map values to filter by a property is O(N). Maintaining a secondary index (Map<Prop, List>) reduces lookup time to O(1). However, secondary indexes must be diligently maintained on updates (remove from old, add to new) to avoid consistency issues.
 **Action:** Implemented `casesByCollector` index in `Case` model with proper upsert handling, reducing lookup time from ~1.7ms to ~0.0002ms (8500x improvement).
+
+## 2026-02-01 - API Payload Compression
+**Learning:** `getCustomers` endpoint was sending large uncompressed JSON payloads.
+**Action:** Implemented Gzip compression using `zlib` in `caseController.js`, reducing payload size by ~88% (0.77MB to 0.09MB for 10k items).
