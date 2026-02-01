@@ -3,6 +3,7 @@ import { addCase, getCaseById, getCaseCount, getCasesByCollector } from "../mode
 import { calculateRiskScore } from "../services/riskScoreService.js";
 import { updatePerformance } from "../services/performanceService.js";
 import { logCommunication } from "../services/communicationLogger.js";
+import { gzip } from "zlib";
 
 // Customer Logic
 export const createCustomer = (req, res) => {
@@ -13,9 +14,24 @@ export const createCustomer = (req, res) => {
 };
 
 export const getCustomers = (req, res) => {
-    // Optimization: riskScore is now pre-calculated in the model
-    // This avoids O(N) calculation and object allocation on every request
-    res.json(getAllCustomers());
+    const customers = getAllCustomers();
+    const acceptEncoding = req.headers['accept-encoding'];
+
+    // Optimization: Gzip compression to reduce payload size
+    if (acceptEncoding && acceptEncoding.includes('gzip')) {
+        const json = JSON.stringify(customers);
+        gzip(json, (err, buffer) => {
+            if (err) {
+                console.error("Compression error:", err);
+                return res.json(customers);
+            }
+            res.set('Content-Encoding', 'gzip');
+            res.set('Content-Type', 'application/json');
+            res.send(buffer);
+        });
+    } else {
+        res.json(customers);
+    }
 };
 
 // Case Logic
