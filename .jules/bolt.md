@@ -13,3 +13,7 @@
 ## 2026-02-02 - Large Payload Mitigation
 **Learning:** The `getCustomers` endpoint returns the entire dataset (O(N) payload). While pagination is the long-term fix, network transfer is the immediate bottleneck.
 **Action:** Implemented manual Gzip compression using `zlib` (no new deps). reduced payload by ~4.3x (1.1MB -> 0.27MB for 10k items), significantly improving response time on constrained networks.
+
+## 2026-02-04 - Client-Side Rendering Bottleneck
+**Learning:** Rendering 10k+ items in React (even if compressed over network) causes massive DOM node creation, freezing the UI.
+**Action:** Implemented client-side pagination (50 items/page) in `Customers.jsx`. While it doesn't solve the network payload size, it solves the rendering crash.
