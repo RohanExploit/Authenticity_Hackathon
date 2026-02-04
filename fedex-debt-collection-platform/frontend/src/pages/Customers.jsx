@@ -4,17 +4,24 @@ import { api } from "../services/api";
 
 export default function Customers() {
     const [customers, setCustomers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 50;
     const navigate = useNavigate();
 
     useEffect(() => {
         api.get("/customers").then(res => setCustomers(res.data));
     }, []);
 
+    // Pagination Logic
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = customers.slice(indexOfFirstItem, indexOfLastItem);
+
     return (
         <div style={{ padding: 30 }}>
             <h2>Customers</h2>
 
-            {customers.map(c => (
+            {currentItems.map(c => (
                 <div key={c.id} style={card}>
                     <h4>{c.id}</h4>
                     <p>Overdue: ₹{c.overdueAmount}</p>
@@ -34,6 +41,25 @@ export default function Customers() {
                     </button>
                 </div>
             ))}
+
+            {/* Bolt Optimization: Client-side Pagination */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20, gap: 10 }}>
+                <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    style={{ ...btn, marginTop: 0, opacity: currentPage === 1 ? 0.5 : 1 }}
+                >
+                    Previous
+                </button>
+                <span>Page {currentPage} of {Math.ceil(customers.length / itemsPerPage)}</span>
+                <button
+                    onClick={() => setCurrentPage(prev => prev + 1)}
+                    disabled={indexOfLastItem >= customers.length}
+                    style={{ ...btn, marginTop: 0, opacity: indexOfLastItem >= customers.length ? 0.5 : 1 }}
+                >
+                    Next
+                </button>
+            </div>
         </div>
     );
 }
