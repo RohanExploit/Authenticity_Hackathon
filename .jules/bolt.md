@@ -13,3 +13,7 @@
 ## 2026-02-02 - Large Payload Mitigation
 **Learning:** The `getCustomers` endpoint returns the entire dataset (O(N) payload). While pagination is the long-term fix, network transfer is the immediate bottleneck.
 **Action:** Implemented manual Gzip compression using `zlib` (no new deps). reduced payload by ~4.3x (1.1MB -> 0.27MB for 10k items), significantly improving response time on constrained networks.
+
+## 2026-02-04 - Client-Side Rendering Bottleneck
+**Learning:** Returning a large dataset (e.g., 5000+ items) from the backend causes severe frontend rendering lag if rendered directly. The backend sends all data, but the DOM cannot handle thousands of nodes efficiently.
+**Action:** Implemented client-side pagination in `Customers.jsx` (50 items/page). This decouples the network payload size from the render cost, making the UI responsive even if the backend returns the full dataset.
